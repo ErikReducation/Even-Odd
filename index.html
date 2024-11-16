@@ -62,21 +62,31 @@
           alert('Invalid input. Input must be the word odd or the word even, case insensitive.');
         }
       } while(valid === false)
-    //3-2-1-countdown to console and pid 
-    setTimeout(() => {
-      console.log(3); 
-      document.getElementById('output').innerHTML = '3 \n';//reset html output
-    } , 0);//print 3 with delay of 0s
-    setTimeout(() => {
-      console.log(2); 
-      document.getElementById('output').innerHTML += '2 \n';//append 2
-    } , 1000);//print 2 with delay of 1s
-    setTimeout(() => {
-      console.log(1); 
-      document.getElementById('output').innerHTML += '1 \n';//append 1
-    } , 2000);//print 1 with delay of 2s
+     //3-2-1-countdown to console and pid 
+	    
+      function sleep(ms) {//code lifted from https://www.sitepoint.com/delay-sleep-pause-wait/
+	      return new Promise(resolve => setTimeout(resolve, ms));
+      }
+      //defines a function that waits for ms milliseconds before executing the next line of code
+      
+      async function countdown() {
+      	console.log(3); 
+        document.getElementById('output').innerHTML = '3 \n';//reset html output
+	      
+        await sleep(1000);//wait 1 sec, pause whole js file
+	      
+        console.log(2); 
+        document.getElementById('output').innerHTML += '2 \n';//append 2
+	      
+        await sleep(1000);//''
+   
+     	console.log(1); 
+    	document.getElementById('output').innerHTML += '1 \n';//append 1
+
+	await sleep(1000);//''
+      }
+      countdown();
     
-    setTimeout(() => {//do game logic with delay of 3s
     //pick and sum random two random numbers 1-4 inclusive
     rand1 = Math.random()*3+1;//generate a number between 0 and 3, then add 1
     rand2 = Math.random()*3+1;//''
@@ -119,9 +129,7 @@
     
     //check loop condition ..while)
     } while (donePlaying === false)
-                }, 3000 );//end of function delayed by 3 seconds. I don't want to tell the user 'undefined you chose undefnied the sum 
-                          //was undefined which is undefuned'
-                          //because the game logic was delayed 3 seconds and the end of game display was not. That would be embarassing.
+               
     //Say Goodbye :)
      document.getElementById('output').innerHTML += 'Thanks for playing, ' + name + '!';
      console.log('Thanks for playing, ' + name + '!');//append thanks
