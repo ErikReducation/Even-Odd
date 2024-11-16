@@ -38,6 +38,8 @@
     let sum = 0;
     let rand1 = 0;
     let rand2 = 0;
+    let date = null;
+    let currentDate = null;
     
     //enter name. Name will be inserted with concatenation or template literals. Sanitize input.
     do {
@@ -63,29 +65,35 @@
         }
       } while(valid === false)
      //3-2-1-countdown to console and pid 
-	    
-      function sleep(ms) {//code lifted from https://www.sitepoint.com/delay-sleep-pause-wait/
-	      return new Promise(resolve => setTimeout(resolve, ms));
-      }
-      //defines a function that waits for ms milliseconds before executing the next line of code
-      
-      async function countdown() {
+	
       	console.log(3); 
         document.getElementById('output').innerHTML = '3 \n';//reset html output
-	      
-        await sleep(1000);//wait 1 sec, pause whole js file
+	//wait 1 second
+	date = Date.now();//code lifted from https://www.sitepoint.com/delay-sleep-pause-wait/
+	currentdate = null;
+	    do {
+		    currentDate = Date.now();
+	    } while (currentDate - date < 1000);// very dangerous. Can cause crashes
 	      
         console.log(2); 
         document.getElementById('output').innerHTML += '2 \n';//append 2
-	      
-        await sleep(1000);//''
-   
+	//wait
+	date = Date.now();//code lifted from https://www.sitepoint.com/delay-sleep-pause-wait/
+	currentdate = null;
+	    do {
+		    currentDate = Date.now();
+	    } while (currentDate - date < 1000);// very dangerous. Can cause crashes
+     
      	console.log(1); 
     	document.getElementById('output').innerHTML += '1 \n';//append 1
+	//wait
+	date = Date.now();//code lifted from https://www.sitepoint.com/delay-sleep-pause-wait/
+	currentdate = null;
+	    do {
+		    currentDate = Date.now();
+	    } while (currentDate - date < 1000);// very dangerous. Can cause crashes
 
-	await sleep(1000);//''
-      }
-      countdown();
+	
     function getRandomInt(max) {
  	 return Math.floor(Math.random() * max);
     }
