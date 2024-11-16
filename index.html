@@ -103,12 +103,12 @@
     //check even/odd
     sum = rand1 + rand2;
     if (sum%2 === 0) {//if the sum is divisible by two (even)
-      evenOdd = 'even';
+      evenOrOdd = 'even';
     } else {
-      evenOdd = 'odd';
+      evenOrOdd = 'odd';
     }
     //update bookkeeping
-    if (evenOdd === call) {//didja guess it right?
+    if (evenOrOdd === call) {//didja guess it right?
       outcome = 'Win';
       wins++;
     } else {
