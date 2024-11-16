@@ -50,7 +50,7 @@
     do {
     //ask user to call even/odd. Sanitize input
       do {
-        checkThisString = prompt('${name}, a computer will randomly pick two numbers between 1 and 4 inclusive. Call if the sum will be even or odd.').toLowerCase();
+        checkThisString = prompt(`${name}, a computer will randomly pick two numbers between 1 and 4 inclusive. Call if the sum will be even or odd.`).toLowerCase();
         if (checkThisString === 'even') {
           call = 'even';//store even
           valid = true;//valid inpuit
@@ -86,10 +86,12 @@
 	await sleep(1000);//''
       }
       countdown();
-    
+    function getRandomInt(max) {
+ 	 return Math.floor(Math.random() * max);
+    }
     //pick and sum random two random numbers 1-4 inclusive
-    rand1 = Math.random()*3+1;//generate a number between 0 and 3, then add 1
-    rand2 = Math.random()*3+1;//''
+    rand1 = getRandomInt(3)+1;//generate a number between 0 and 3, then add 1
+    rand2 = getRandomInt(3)+1;//''
     //check even/odd
     sum = rand1 + rand2;
     if (sum%2 === 0) {//if the sum is divisible by two (even)
