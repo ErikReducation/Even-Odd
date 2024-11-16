@@ -1,1 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	
+	<meta charset="utf-8">
+	<meta name="description" content="An academic project.">
+	<meta name="keywords" content="even, odd">
+	<meta name="author" content="Erik Rosenbalm">
+	<meta name="viewport" content="width=device-width">  
+	<title>Even / Odd</title>
+	<link href="css/style.css" rel="stylesheet" type="text/css" >
+
+	<!--Margin view. TURN THIS OFF BEFORE PUBLISHING-->
+	<!--
+	<style>
+	div {
+		border: double cornflowerblue;
+	}
+	</style>
+	-->
+	
+</head>
+<body>
+  <p id ='output'></p>
+
+  <script>
+    //specifications: Sanitize ALL inputs.
+    //begin recordkeeping
+    let wins = 0;
+    let losses = 0;
+    let name = '';
+    let donePlaying = false;
+    let valid = false;
+    let checkThisString = '';
+    let evenOrOdd = '';//result of sum
+    let outcome = '';//win or lose
+    let call = '';//user guess
+    let sum = 0;
+    let rand1 = 0;
+    let rand2 = 0;
+    
+    //enter name. Name will be inserted with concatenation or template literals. Sanitize input.
+    do {
+      name = prompt('Enter name.');
+      if (typeof name === 'undefined'){//check input validity
+        name = prompt('Invalid input. Input must not be empty. If you don\'t have a name, make one up now.');
+      } else {}
+    } while (typeof name === 'undefined')//do this loop until the user inputs a name
+    //begin gameplay loop (do.. 
+    do {
+    //ask user to call even/odd. Sanitize input
+      do {
+        checkThisString = prompt('${name}, a computer will randomly pick two numbers between 1 and 4 inclusive. Call if the sum will be even or odd.').toLowerCase();
+        if (checkThisString === 'even') {
+          call = 'even';//store even
+          valid = true;//valid inpuit
+        } else if (checkThisString === 'odd') {
+          call = 'odd';//store odd
+          valid = true;//valid input
+        } else {
+          valid = false;//invalid input. Catches global valid bool set to true in earlier iteration of loop during 'y' 'n' check.
+          alert('Invalid input. Input must be the word odd or the word even, case insensitive.');
+        }
+      } while(valid === false)
+    //3-2-1-countdown to console and pid 
+    setTimeout(() => {
+      console.log(3); 
+      document.getElementById('output').innerHTML = '3 \n';//reset html output
+    } , 0);//print 3 with delay of 0s
+    setTimeout(() => {
+      console.log(2); 
+      document.getElementById('output').innerHTML += '2 \n';//append 2
+    } , 1000);//print 2 with delay of 1s
+    setTimeout(() => {
+      console.log(1); 
+      document.getElementById('output').innerHTML += '1 \n';//append 1
+    } , 2000);//print 1 with delay of 2s
+    
+    setTimeout(() => {//do game logic with delay of 3s
+    //pick and sum random two random numbers 1-4 inclusive
+    rand1 = Math.random()*3+1;//generate a number between 0 and 3, then add 1
+    rand2 = Math.random()*3+1;//''
+    //check even/odd
+    sum = rand1 + rand2;
+    if (sum%2 === 0) {//if the sum is divisible by two (even)
+      evenOdd = 'even';
+    } else {
+      evenOdd = 'odd';
+    }
+    //update bookkeeping
+    if (evenOdd === call) {//didja guess it right?
+      outcome = 'Win';
+      wins++;
+    } else {
+      outcome = 'Lose';
+      losses++;
+    }
+      
+   
+    
+    
+    //in a prompt, display win/lose, overall record, and ask to play again. Sanitize input
+    do {
+      checkThisString = prompt(`${name}, you chose ${call}, the sum was ${sum}, which is an ${evenOrOdd} number, you ${outcome}! 
+      \n That's ${wins} wins and ${losses} losses! 
+      \n Would you like to play again? y/n`).toLowerCase();
+      if (checkThisString === 'y') {
+        donePlaying = false;//play again
+        valid = true;//valid input
+      } else if (checkThisString === 'n') {
+        donePlaying = true;//done with game
+        valid = true;//valid input
+      } else {
+        valid = false;//invalid input. Catches global valid bool set to true earlier in loop for inputs 'even' or 'odd'.
+        alert('Invalid input. Input must be the letter y or n, case insensitive.');
+      }
+    }
+    while (valid === false)
+    
+    //check loop condition ..while)
+    } while (donePlaying === false)
+                }, 3000 );//end of function delayed by 3 seconds. I don't want to tell the user 'undefined you chose undefnied the sum 
+                          //was undefined which is undefuned'
+                          //because the game logic was delayed 3 seconds and the end of game display was not. That would be embarassing.
+    //Say Goodbye :)
+     document.getElementById('output').innerHTML += 'Thanks for playing, ' + name + '!';
+     console.log('Thanks for playing, ' + name + '!');//append thanks
+  </script>
+</body>
+</html>
 
